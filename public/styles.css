@@ -1,0 +1,287 @@
+/* =========================================================
+   디자인 토큰 (design-system.md v1.1)
+   값을 바꿀 때는 여기만 고친다.
+   ========================================================= */
+:root {
+  /* 컬러 */
+  --color-paper: #FAF8F3;   /* 페이지 배경 */
+  --color-card: #FFFFFF;    /* 카드, 식권 영역 */
+  --color-ink: #1A1A1A;     /* 본문 글씨, 선, 주요 버튼 */
+  --color-ink-hover: #333333;
+  --color-sub: #5C5C5C;     /* 보조 설명 */
+  --color-red: #D12F1A;     /* 공지에만 */
+
+  /* 글자 */
+  --font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-title: 700 1.375rem/1.4 var(--font-family);   /* 22px */
+  --font-subtitle: 700 1.125rem/1.4 var(--font-family);/* 18px */
+  --font-body: 400 1rem/1.6 var(--font-family);        /* 16px */
+  --font-button: 700 1rem/1 var(--font-family);        /* 16px */
+  --font-caption: 400 0.875rem/1.5 var(--font-family); /* 14px */
+  --font-caption-bold: 700 0.875rem/1.5 var(--font-family);
+
+  /* 간격 (8px 단위) */
+  --space-1: 0.5rem;  /* 8 */
+  --space-2: 1rem;    /* 16 */
+  --space-3: 1.5rem;  /* 24 */
+  --space-4: 2rem;    /* 32 */
+  --space-6: 3rem;    /* 48 */
+
+  /* 모양 */
+  --line: 2px solid var(--color-ink);
+  --line-thin: 1px solid var(--color-ink);
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-image: 8px;
+  --button-height: 52px;
+  --content-width: 480px;
+  --step-indent: 44px; /* 번호 원 32px + 간격 12px */
+}
+
+/* =========================================================
+   폰트 (fonts/ 의 서브셋. tools/subset-fonts.py 로 다시 만든다)
+   ========================================================= */
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/pretendard-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/pretendard-700.woff2") format("woff2");
+}
+
+/* =========================================================
+   기본
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font: var(--font-body);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3, p, ol { margin: 0; }
+
+a { color: var(--color-ink); }
+
+:focus-visible {
+  outline: var(--line);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: calc(var(--content-width) + var(--space-2) * 2);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* =========================================================
+   헤더
+   ========================================================= */
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+.site-header__logo { width: 200px; }
+.site-header__handle { font: var(--font-caption-bold); color: var(--color-sub); }
+
+/* =========================================================
+   섹션 카드
+   ========================================================= */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.card {
+  background: var(--color-card);
+  border: var(--line);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.card__head { display: flex; flex-direction: column; gap: var(--space-1); }
+.card__title { font: var(--font-title); }
+.card__desc { color: var(--color-sub); }
+
+.photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: var(--line-thin);
+  border-radius: var(--radius-image);
+  background: var(--color-paper);
+}
+
+/* =========================================================
+   공지
+   ========================================================= */
+.notice {
+  border: 2px solid var(--color-red);
+  border-radius: var(--radius-button);
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.notice__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-red);
+  font: var(--font-caption-bold);
+}
+
+.keyword {
+  font-weight: 700;
+  font-family: inherit;
+  font-size: inherit;
+  background: var(--color-paper);
+  border: var(--line-thin);
+  border-radius: 6px;
+  padding: 1px var(--space-1);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   만드는 방법 (details)
+   ========================================================= */
+.howto__summary {
+  min-height: var(--button-height);
+  border: var(--line);
+  border-radius: var(--radius-button);
+  background: var(--color-card);
+  padding: 0 var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  font: var(--font-button);
+  cursor: pointer;
+  list-style: none;
+}
+.howto__summary::-webkit-details-marker { display: none; }
+.howto__summary:hover { background: var(--color-paper); }
+.howto__count { font-weight: 400; color: var(--color-sub); }
+.howto__chevron { flex: none; transition: transform 0.2s ease; }
+.howto[open] .howto__chevron { transform: rotate(180deg); }
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.step { display: flex; flex-direction: column; gap: 12px; }
+.step__row { display: flex; align-items: flex-start; gap: 12px; }
+.step__num {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-button);
+}
+.step__text { padding-top: 3px; }
+.step__img {
+  margin-left: var(--step-indent);
+  width: calc(100% - var(--step-indent));
+  border: var(--line-thin);
+  border-radius: var(--radius-image);
+  background: var(--color-card);
+}
+
+/* =========================================================
+   버튼
+   ========================================================= */
+.button {
+  min-height: var(--button-height);
+  border: var(--line);
+  border-radius: var(--radius-button);
+  background: var(--color-card);
+  color: var(--color-ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-2);
+  font: var(--font-button);
+  text-align: center;
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+.button:hover { background: var(--color-paper); }
+.button:active { transform: scale(0.98); }
+.button svg { flex: none; }
+
+.button--primary { background: var(--color-ink); color: var(--color-card); }
+.button--primary:hover { background: var(--color-ink-hover); }
+
+.teaser { font: var(--font-caption); color: var(--color-sub); text-align: center; }
+
+/* =========================================================
+   푸터
+   ========================================================= */
+.site-footer { text-align: center; font: var(--font-caption); color: var(--color-sub); }
+
+/* =========================================================
+   404
+   ========================================================= */
+.not-found {
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: calc(var(--content-width) + var(--space-2) * 2);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+.not-found__logo { width: 160px; }
+.not-found__code { font: 700 3rem/1 var(--font-family); }
+.not-found__text { display: flex; flex-direction: column; gap: var(--space-1); }
+.not-found__title { font: var(--font-title); }
+.not-found__desc { color: var(--color-sub); }
+.not-found .button { align-self: stretch; }
+
+/* =========================================================
+   PC
+   ========================================================= */
+@media (min-width: 768px) {
+  .page { padding-top: 4rem; padding-bottom: 4rem; }
+  .site-header__logo { width: 240px; }
+}
+
+/* 움직임 줄이기 설정을 켠 사람에게는 애니메이션을 끈다 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
